@@ -7,7 +7,6 @@ import tsp
 
 
 class VehicleRoutingProblem:
-
     def __init__(self, tspName, numOfVehicles, depotIndex):
         """
         Creates an instance of a VRP
@@ -99,7 +98,7 @@ class VehicleRoutingProblem:
         totalDistance = 0
         for route in self.getRoutes(indices):
             routeDistance = self.getRouteDistance(route)
-            #print("- route distance = ", routeDistance)
+            # print("- route distance = ", routeDistance)
             totalDistance += routeDistance
         return totalDistance
 
@@ -112,7 +111,7 @@ class VehicleRoutingProblem:
         maxDistance = 0
         for route in self.getRoutes(indices):
             routeDistance = self.getRouteDistance(route)
-            #print("- route distance = ", routeDistance)
+            # print("- route distance = ", routeDistance)
             maxDistance = max(routeDistance, maxDistance)
         return maxDistance
 
@@ -133,7 +132,7 @@ class VehicleRoutingProblem:
                 # print("- route distance = ", routeDistance)
                 totalDistance += routeDistance
                 counter += 1
-        return totalDistance/counter
+        return totalDistance / counter
 
     def plotData(self, indices):
         """breaks the list of indices into separate routes and plot each route in a different color
@@ -143,11 +142,11 @@ class VehicleRoutingProblem:
         """
 
         # plot th ecities of the underlying TSP:
-        plt.scatter(*zip(*self.tsp.locations), marker='.', color='red')
+        plt.scatter(*zip(*self.tsp.locations), marker=".", color="red")
 
         # mark the depot location with a large 'X':
         d = self.tsp.locations[self.depotIndex]
-        plt.plot(d[0], d[1], marker='x', markersize=10, color='green')
+        plt.plot(d[0], d[1], marker="x", markersize=10, color="green")
 
         # break the indices to separate routes and plot each route in a different color:
         routes = self.getRoutes(indices)
@@ -155,7 +154,7 @@ class VehicleRoutingProblem:
         for route in routes:
             route = [self.depotIndex] + route + [self.depotIndex]
             stops = [self.tsp.locations[i] for i in route]
-            plt.plot(*zip(*stops), linestyle='-', color=next(color))
+            plt.plot(*zip(*stops), linestyle="-", color=next(color))
 
         return plt
 
@@ -177,4 +176,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
