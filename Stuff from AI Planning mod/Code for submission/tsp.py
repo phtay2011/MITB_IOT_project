@@ -44,13 +44,16 @@ class TravelingSalesmanProblem:
         return self.tspSize
 
     def __initData(self):
-        """Reads the serialized data, and if not available - calls __create_data() to prepare it
-        """
+        """Reads the serialized data, and if not available - calls __create_data() to prepare it"""
 
         # attempt to read serialized data:
         try:
-            self.locations = pickle.load(open(os.path.join("tsp-data", self.name + "-loc.pickle"), "rb"))
-            self.distances = pickle.load(open(os.path.join("tsp-data", self.name + "-dist.pickle"), "rb"))
+            self.locations = pickle.load(
+                open(os.path.join("tsp-data", self.name + "-loc.pickle"), "rb")
+            )
+            self.distances = pickle.load(
+                open(os.path.join("tsp-data", self.name + "-dist.pickle"), "rb")
+            )
         except (OSError, IOError):
             pass
 
@@ -69,17 +72,21 @@ class TravelingSalesmanProblem:
         self.locations = []
 
         # open whitespace-delimited file from url and read lines from it:
-        with urlopen("http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsp/" + self.name + ".tsp") as f:
-            reader = csv.reader(codecs.iterdecode(f, 'utf-8'), delimiter=" ", skipinitialspace=True)
+        with urlopen(
+            "http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsp/" + self.name + ".tsp"
+        ) as f:
+            reader = csv.reader(
+                codecs.iterdecode(f, "utf-8"), delimiter=" ", skipinitialspace=True
+            )
 
             # skip lines until one of these lines is found:
             for row in reader:
-                if row[0] in ('DISPLAY_DATA_SECTION', 'NODE_COORD_SECTION'):
+                if row[0] in ("DISPLAY_DATA_SECTION", "NODE_COORD_SECTION"):
                     break
 
             # read data lines until 'EOF' found:
             for row in reader:
-                if row[0] != 'EOF':
+                if row[0] != "EOF":
                     # remove index at beginning of line:
                     del row[0]
 
@@ -104,13 +111,23 @@ class TravelingSalesmanProblem:
                     distance = np.linalg.norm(self.locations[j] - self.locations[i])
                     self.distances[i][j] = distance
                     self.distances[j][i] = distance
-                    print("{}, {}: location1 = {}, location2 = {} => distance = {}".format(i, j, self.locations[i], self.locations[j], distance))
+                    print(
+                        "{}, {}: location1 = {}, location2 = {} => distance = {}".format(
+                            i, j, self.locations[i], self.locations[j], distance
+                        )
+                    )
 
             # serialize locations and distances:
             if not os.path.exists("tsp-data"):
                 os.makedirs("tsp-data")
-            pickle.dump(self.locations, open(os.path.join("tsp-data", self.name + "-loc.pickle"), "wb"))
-            pickle.dump(self.distances, open(os.path.join("tsp-data", self.name + "-dist.pickle"), "wb"))
+            pickle.dump(
+                self.locations,
+                open(os.path.join("tsp-data", self.name + "-loc.pickle"), "wb"),
+            )
+            pickle.dump(
+                self.distances,
+                open(os.path.join("tsp-data", self.name + "-dist.pickle"), "wb"),
+            )
 
     def getTotalDistance(self, indices):
         """Calculates the total distance of the path described by the given indices of the cities
@@ -135,14 +152,14 @@ class TravelingSalesmanProblem:
         """
 
         # plot the dots representing the cities:
-        plt.scatter(*zip(*self.locations), marker='.', color='red')
+        plt.scatter(*zip(*self.locations), marker=".", color="red")
 
         # create a list of the corresponding city locations:
         locs = [self.locations[i] for i in indices]
         locs.append(locs[0])
 
         # plot a line between each pair of consequtive cities:
-        plt.plot(*zip(*locs), linestyle='-', color='blue')
+        plt.plot(*zip(*locs), linestyle="-", color="blue")
 
         return plt
 
@@ -153,10 +170,40 @@ def main():
     tsp = TravelingSalesmanProblem("bayg29")
 
     # generate a random solution and evaluate it:
-    #randomSolution = random.sample(range(len(tsp)), len(tsp))
+    # randomSolution = random.sample(range(len(tsp)), len(tsp))
 
     # see http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsp/bayg29.opt.tour
-    optimalSolution = [0, 27, 5, 11, 8, 25, 2, 28, 4, 20, 1, 19, 9, 3, 14, 17, 13, 16, 21, 10, 18, 24, 6, 22, 7, 26, 15, 12, 23]
+    optimalSolution = [
+        0,
+        27,
+        5,
+        11,
+        8,
+        25,
+        2,
+        28,
+        4,
+        20,
+        1,
+        19,
+        9,
+        3,
+        14,
+        17,
+        13,
+        16,
+        21,
+        10,
+        18,
+        24,
+        6,
+        22,
+        7,
+        26,
+        15,
+        12,
+        23,
+    ]
 
     print("Problem name: " + tsp.name)
     print("Optimal solution = ", optimalSolution)
