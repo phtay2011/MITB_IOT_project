@@ -45,12 +45,28 @@ class distance_duration_calculator:
             gps_node = (lat ,lng)
             traffic_light_nodes_lst.append(gps_node )
             
+        traffic_lights_location_lst=[]
+        traffic_lights_location_color = []
+        for i in range(len(traffic_light_nodes_lst)):
+            traffic_light_1 = (traffic_light_nodes_lst[i][0]+0.000015, traffic_light_nodes_lst[i][1]+0.000015)
+            traffic_light_2 = traffic_light_nodes_lst[i]
+            traffic_light_3 = (traffic_light_nodes_lst[i][0]-0.000015, traffic_light_nodes_lst[i][1]-0.000015)
+            traffic_lights_location_lst.append(traffic_light_1)
+            traffic_lights_location_color.append('R')
+            traffic_lights_location_lst.append(traffic_light_2)
+            traffic_lights_location_color.append('G')
+            traffic_lights_location_lst.append(traffic_light_3)
+            traffic_lights_location_color.append('R')
+            
+            
         res = {'ambulance_node':self.node1,
                 'hospital_node':self.node2,
                 'distance_in_km':total_distance,
                'duration_in_hours':total_duration,
                'duration_in_min':total_duration_in_min,
-               'traffic_light_nodes':traffic_light_nodes_lst
+               'road_nodes':traffic_light_nodes_lst,
+               'traffic_light_nodes':traffic_lights_location_lst,
+               'traffic_light_color':traffic_lights_location_color
                }
         return res
 
