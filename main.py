@@ -2,10 +2,11 @@
 """
 Created on Wed Oct 21 14:08:26 2020
 
-@author: User
+@author: Paul
 """
 import gmap_api
 from flask import Flask, request
+import mqtt_module
 
 APP = Flask(__name__)
 
@@ -23,7 +24,13 @@ hospital_node = (1.33553,103.74387)
 def generate_starting_route():
     dd=gmap_api.distance_duration_calculator(node1 = ambulance_node ,node2 = hospital_node )
     #Get distance 
-    return dd.get_distance_duration()
+    get_result = dd.get_distance_duration()
+    
+    #save traffic light colors as a string
+    traffic_light_color_str = ''.join(get_result['traffic_light_color'])
+    #publish to mqtt
+    mqtt_module.publish_gateway_to_broker(traffic_light_color_str)
+    return get_result 
 
 #api 2 - When uesr click the next button, FE needs to take the xth index of the `traffic_light_nodes` list
 # Input will be next_node
@@ -37,10 +44,16 @@ def generate_route_from_next_node():
     next_node = tuple(requester_input["node"])
     print(next_node )
     next_button=gmap_api.distance_duration_calculator(node1 = next_node ,node2 = hospital_node )
-    #Get distance 
-    return next_button.get_distance_duration()
+    get_result = next_button.get_distance_duration()
+    
+    #save traffic light colors as a string
+    traffic_light_color_str = ''.join(get_result['traffic_light_color'])
+    #publish to mqtt
+    mqtt_module.publish_gateway_to_broker(traffic_light_color_str)
+
+    
+    return get_result 
 
 if __name__ == "__main__":
     APP.run(debug=True)
-    
     

@@ -2,12 +2,13 @@
 """
 Created on Sat Jul 18 11:45:49 2020
 
-@author: User
+@author: Paul
 """
 
 import googlemaps
 from datetime import datetime
 import numpy as np
+import random
 
 # Geocoding an address
 class distance_duration_calculator:
@@ -51,14 +52,19 @@ class distance_duration_calculator:
             traffic_light_1 = (traffic_light_nodes_lst[i][0]+0.000015, traffic_light_nodes_lst[i][1]+0.000015)
             traffic_light_2 = traffic_light_nodes_lst[i]
             traffic_light_3 = (traffic_light_nodes_lst[i][0]-0.000015, traffic_light_nodes_lst[i][1]-0.000015)
-            traffic_lights_location_lst.append(traffic_light_1)
-            traffic_lights_location_color.append('R')
-            traffic_lights_location_lst.append(traffic_light_2)
-            traffic_lights_location_color.append('G')
+            traffic_lights_location_lst.append(traffic_light_1)            
+            traffic_lights_location_lst.append(traffic_light_2)            
             traffic_lights_location_lst.append(traffic_light_3)
-            traffic_lights_location_color.append('R')
-            
-            
+            if i <=3 :
+                traffic_lights_location_color.append('R')
+                traffic_lights_location_color.append('G')
+                traffic_lights_location_color.append('R')
+            else:
+                middle_traffic_color = random.choice(['R','G'])
+                left_right_traffic_color = np.setdiff1d(['R','G'],[middle_traffic_color ])[0]
+                traffic_lights_location_color.append(left_right_traffic_color)
+                traffic_lights_location_color.append(middle_traffic_color)
+                traffic_lights_location_color.append(left_right_traffic_color )
         res = {'ambulance_node':self.node1,
                 'hospital_node':self.node2,
                 'distance_in_km':total_distance,
@@ -69,7 +75,7 @@ class distance_duration_calculator:
                'traffic_light_color':traffic_lights_location_color
                }
         return res
-
+    
 ambulance_node =(1.290081, 103.845511)
 hospital_node = (1.33553,103.74387)
 
