@@ -89,7 +89,8 @@ def init_serial_device():
         # guess the serial device
         serial_device = re.search('COM([0-9]*)', stdout)
         if serial_device:
-            serial_device = f"/dev/ttyS{serial_device.group(1)}"
+            #serial_device = f"/dev/ttyS{serial_device.group(1)}" # If running on Ubuntu
+            serial_device = serial_device.group(0) # If running on Windows, Anaconda
 
     elif sys.platform == "linux" or sys.platform == "linux2": # Linux
 
@@ -157,29 +158,4 @@ def demo_serial_g2s():
         logger.info("writing to serial port: dec")
         s.write(f"dec\n".encode())
         time.sleep(1)
-        
-if __name__ == "__main__":
-
-    # table mapping arguments to functions
-    dispatcher = {
-        'demo_serial_s2g' : demo_serial_s2g,
-        'demo_serial_g2s' : demo_serial_g2s,
-        'demo_radio_g2s' : demo_radio_g2s,
-        'demo_g2b' : demo_g2b,
-        'demo_b2g' : demo_b2g,
-        'demo_s2g2b' : demo_s2g2b,
-        }
-
-    logger.info("Press Ctrl-C to stop")
-
-    # parse arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument("demo_name", help=f"{list(dispatcher.keys())}")
-    args = parser.parse_args()
-
-    try:
-        # call function
-        dispatcher[args.demo_name]()
-    except KeyError:
-        logger.error(f"No such demo: {args.demo_name}")
-        exit()
+demo_serial_g2s()
