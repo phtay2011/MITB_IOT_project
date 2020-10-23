@@ -1,4 +1,4 @@
-# Welcome to StackEdit!
+# Welcome to MITB IOT PROJECT!
 
 ## Folder navigation
 
@@ -9,7 +9,7 @@
  - hardware_code - This stores all the code that will be run on laptop / microbit
 	 -  laptop_gateway.py - This will be run on laptop. This guy will subscribe to a topic and send the info via serial to the microbit
 	 - MB gateway - This will receive info from laptop via serial and broadcast it via radio
-	 - MB radio linked to GW - This will receive info from MG gateway via radio and print the traffic light color on LED 
+	 - MB radio linked to GW - This will receive info from MG gateway via radio and print the traffic light color on LED
  - Other stuff not part of main code
 	 - Google Map plot test.ipynb - This is for MAX to see how the map will look like on the Front End
 	 - sample_payloads.md - This is the API docs
