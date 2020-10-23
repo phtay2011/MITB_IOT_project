@@ -23,7 +23,8 @@ logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s', datefmt='%Y
 logger = logging.getLogger(__name__)
 
 MQTT_BROKER_HOSTNAME="broker.mqttdashboard.com"
-traffic_light_instruction ='TEST'
+traffic_light_instruction ='TEST2'
+traffic_light_instruction_to_print ='TEST1'
 '''
 SECTION 1
 This section will be responsible to receive the information via MQTT
@@ -46,7 +47,10 @@ def demo_b2g_on_connect(client, userdata, flags, rc):
 def demo_b2g_on_message(client, userdata, msg):
     print(f"msg.topic: {msg.topic}  msg.payload.decode('utf8'): {msg.payload.decode('utf8')}")
     global traffic_light_instruction
+    global traffic_light_instruction_to_print
     traffic_light_instruction = msg.payload.decode('utf8')
+    traffic_light_instruction_to_print = traffic_light_instruction[0:10]
+
 
 # To receive info via mqtt and print the output
 def subscribe_broker_to_gatewy():
@@ -140,10 +144,12 @@ def serial_gateway_to_microbit():
         time.sleep(1) # sleep to make sure serialport has been opened, before doing anything else
         s.reset_input_buffer()
         # write data to the serial port, sleeping 1s between writes
-        logger.info(f"writing to serial port:{traffic_light_instruction}")
-        s.write(traffic_light_instruction.encode())
+        logger.info(f"writing to serial port:{traffic_light_instruction_to_print}")
+        for i in range (5):
+            s.write(f"{traffic_light_instruction_to_print}\n".encode())
+            time.sleep(1)
 
-"""
+
 def demo_serial_g2s():
     serial_device = init_serial_device()
     with serial.Serial(serial_device, 115200, timeout=10) as s:
@@ -172,5 +178,6 @@ def demo_serial_g2s():
         logger.info("writing to serial port: dec")
         s.write(f"dec\n".encode())
         time.sleep(1)
-"""
 subscribe_broker_to_gatewy()
+#serial_gateway_to_microbit()
+#demo_serial_g2s()
