@@ -23,7 +23,7 @@ logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s', datefmt='%Y
 logger = logging.getLogger(__name__)
 
 MQTT_BROKER_HOSTNAME="broker.mqttdashboard.com"
-
+traffic_light_instruction ='TEST'
 '''
 SECTION 1
 This section will be responsible to receive the information via MQTT
@@ -45,6 +45,8 @@ def demo_b2g_on_connect(client, userdata, flags, rc):
 # Callback for when a message is received from the MQTT broker.
 def demo_b2g_on_message(client, userdata, msg):
     print(f"msg.topic: {msg.topic}  msg.payload.decode('utf8'): {msg.payload.decode('utf8')}")
+    global traffic_light_instruction
+    traffic_light_instruction = msg.payload.decode('utf8')
 
 # To receive info via mqtt and print the output
 def subscribe_broker_to_gatewy():
@@ -60,17 +62,18 @@ def subscribe_broker_to_gatewy():
     while True:
         # wait for timeout=1 seconds, process any events during that 1s, then return. See https://pypi.org/project/paho-mqtt/#network-loop
         client.loop(timeout=1)
+        serial_gateway_to_microbit()
 #subscribe_broker_to_gatewy()
 
 '''
 SECTION 2
-This section will be responsible take the information from SECTION 1 and send it via serial to the gateway microbit 
+This section will be responsible take the information from SECTION 1 and send it via serial to the gateway microbit
 '''
 # Handles the case when the serial port can't be found
 def handle_missing_serial_port():
     logger.error("Couldn't connect to the micro:bit. Try plugging in your micro:bit, closing all apps/browser tabs using the micro:bit, and try again.")
     exit()
-    
+
 # Initializes the serial device. Tries to guess which serial port the micro:bit is connected to
 def init_serial_device():
     logger.info(f"sys.platform: {sys.platform}")
@@ -107,7 +110,7 @@ def init_serial_device():
             serial_device = serial_device.group(1)
 
     elif sys.platform == "darwin": # OS X
-        
+
         # list the serial devices available
         try:
             stdout = subprocess.check_output('ls /dev/cu.usbmodem*', stderr=subprocess.STDOUT, shell = True).decode("utf-8").strip()
@@ -129,7 +132,18 @@ def init_serial_device():
 
     return serial_device
 
-# To publish from gateway to microbit_gateway via serial 
+# To publish from gateway to microbit_gateway via serial
+
+def serial_gateway_to_microbit():
+    serial_device = init_serial_device()
+    with serial.Serial(serial_device, 115200, timeout=10) as s:
+        time.sleep(1) # sleep to make sure serialport has been opened, before doing anything else
+        s.reset_input_buffer()
+        # write data to the serial port, sleeping 1s between writes
+        logger.info(f"writing to serial port:{traffic_light_instruction}")
+        s.write(traffic_light_instruction.encode())
+
+"""
 def demo_serial_g2s():
     serial_device = init_serial_device()
     with serial.Serial(serial_device, 115200, timeout=10) as s:
@@ -158,4 +172,5 @@ def demo_serial_g2s():
         logger.info("writing to serial port: dec")
         s.write(f"dec\n".encode())
         time.sleep(1)
-demo_serial_g2s()
+"""
+subscribe_broker_to_gatewy()
