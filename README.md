@@ -17,6 +17,8 @@
 
 ## UML diagrams
 
+![UML diagram](UML diagram.PNG)
+
 ```mermaid
 sequenceDiagram
 /generate_starting_route ->> gmap_api: Sends gps coordinates
