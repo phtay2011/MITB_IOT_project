@@ -4,8 +4,9 @@ Created on Wed Oct 21 14:08:26 2020
 
 @author: Paul
 """
-import gmap_api
 from flask import Flask, request
+
+import gmap_api
 import mqtt_module
 
 APP = Flask(__name__)
