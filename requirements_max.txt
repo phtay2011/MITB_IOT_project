@@ -1,5 +1,6 @@
 appdirs==1.4.4
 argon2-cffi @ file:///D:/bld/argon2-cffi_1596630042503/work
+astroid==2.4.2
 async-generator==1.10
 attrs @ file:///home/conda/feedstock_root/build_artifacts/attrs_1599308529326/work
 backcall @ file:///home/conda/feedstock_root/build_artifacts/backcall_1592338393461/work
@@ -14,15 +15,20 @@ colorama==0.4.3
 decorator==4.4.2
 defusedxml==0.6.0
 entrypoints==0.3
-Flask==1.1.1
-Flask-Cors==3.0.8
-googlemaps==4.4.2
+et-xmlfile==1.0.1
+Flask==1.1.2
+geojson==2.5.0
 gmaps==0.9.0
+googlemaps==4.4.2
 idna==2.10
 importlib-metadata @ file:///D:/bld/importlib-metadata_1600910662556/work
 ipykernel @ file:///D:/bld/ipykernel_1595447084845/work/dist/ipykernel-5.3.4-py3-none-any.whl
 ipython @ file:///D:/bld/ipython_1598750147809/work
 ipython-genutils==0.2.0
+ipywidgets @ file:///home/conda/feedstock_root/build_artifacts/ipywidgets_1599554010055/work
+isort==5.6.4
+itsdangerous==1.1.0
+jdcal==1.4.1
 jedi==0.15.2
 Jinja2==2.11.2
 jsonschema==3.2.0
@@ -30,7 +36,9 @@ jupyter-client @ file:///home/conda/feedstock_root/build_artifacts/jupyter_clien
 jupyter-core==4.6.3
 jupyter-server @ file:///D:/bld/jupyter_server_1601541258777/work
 jupyterlab-pygments @ file:///home/conda/feedstock_root/build_artifacts/jupyterlab_pygments_1601375948261/work
+lazy-object-proxy==1.4.3
 MarkupSafe @ file:///D:/bld/markupsafe_1600368513338/work
+mccabe==0.6.1
 mistune==0.8.4
 mypy-extensions==0.4.3
 nb-black==1.0.7
@@ -40,8 +48,10 @@ nbformat @ file:///home/conda/feedstock_root/build_artifacts/nbformat_1594060262
 nest-asyncio @ file:///home/conda/feedstock_root/build_artifacts/nest-asyncio_1601342677072/work
 notebook @ file:///D:/bld/notebook_1599742602312/work
 numpy==1.19.2
+openpyxl==3.0.5
 ortools==7.8.7959
 packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1589925210001/work
+paho-mqtt==1.5.1
 pandas==1.1.2
 pandocfilters==1.4.2
 parso==0.5.2
@@ -52,6 +62,7 @@ prompt-toolkit @ file:///home/conda/feedstock_root/build_artifacts/prompt-toolki
 protobuf==3.13.0
 pycparser @ file:///home/conda/feedstock_root/build_artifacts/pycparser_1593275161868/work
 Pygments @ file:///home/conda/feedstock_root/build_artifacts/pygments_1600347314331/work
+pylint==2.6.0
 pyparsing==2.4.7
 pyrsistent @ file:///D:/bld/pyrsistent_1599988476846/work
 python-dateutil==2.8.1
@@ -74,6 +85,9 @@ urllib3==1.25.10
 voila @ file:///home/conda/feedstock_root/build_artifacts/voila_1600924001789/work
 wcwidth @ file:///home/conda/feedstock_root/build_artifacts/wcwidth_1600965781394/work
 webencodings==0.5.1
+Werkzeug==1.0.1
+widgetsnbextension @ file:///D:/bld/widgetsnbextension_1603129674993/work
 wincertstore==0.2
+wrapt==1.12.1
 xlrd==1.2.0
 zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1600892581779/work
