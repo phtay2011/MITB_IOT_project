@@ -1,14 +1,9 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jul 18 11:45:49 2020
-
-@author: Paul
-"""
-
 import googlemaps
 from datetime import datetime
 import numpy as np
 import random
+
+googleMapKey = "AIzaSyAPldhz_3zhaTEzHdhSQ0J5HUzOVLiDmZk"
 
 # Geocoding an address
 class distance_duration_calculator:
@@ -30,7 +25,7 @@ class distance_duration_calculator:
         return str(node[0]) + "," + str(node[1])
 
     def get_distance_duration(self):
-        gmaps = googlemaps.Client(key="AIzaSyAPldhz_3zhaTEzHdhSQ0J5HUzOVLiDmZk")
+        gmaps = googlemaps.Client(key=googleMapKey)
         direction_results = gmaps.directions(
             distance_duration_calculator.node_preprocessing(self.node1),
             distance_duration_calculator.node_preprocessing(self.node2),
@@ -92,9 +87,9 @@ class distance_duration_calculator:
         return res
 
 
-ambulance_node = (1.290081, 103.845511)
-hospital_node = (1.33553, 103.74387)
+# ambulance_node = (1.290081, 103.845511)
+# hospital_node = (1.33553, 103.74387)
 
-dd = distance_duration_calculator(node1=ambulance_node, node2=hospital_node)
-# Get distance
-dd.get_distance_duration()
+# dd = distance_duration_calculator(node1=ambulance_node, node2=hospital_node)
+# # Get distance
+# dd.get_distance_duration()

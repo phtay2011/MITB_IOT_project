@@ -1,6 +1,7 @@
 from flask import Flask, request
 
 import gmap_api
+from utils import get_geo_loc
 import mqtt_module
 
 # Pre defined nodes
@@ -25,7 +26,9 @@ def generate_starting_route():
     return get_result
 
 
-@server.route("/generate_starting_route_with_origin_destination", methods=["POST"])
+@server.route(
+    "/generate_starting_route_with_origin_destination", methods=["POST"]
+)
 def generate_starting_route_with_origin_destination():
     requester_input = request.json
     origin_node = tuple(requester_input["origin_node"])
@@ -37,6 +40,13 @@ def generate_starting_route_with_origin_destination():
     traffic_light_color_str = "".join(get_result["traffic_light_color"])
     mqtt_module.publish_gateway_to_broker(traffic_light_color_str)
     return get_result
+
+
+@server.route("/get_geo_location", methods=["POST"])
+def generate_geo_location():
+    requester_input = request.json
+    node = tuple(requester_input["node"])
+    return str(get_geo_loc(node))
 
 
 # api 2 - When uesr click the next button, FE needs to take the xth index of the `traffic_light_nodes` list
