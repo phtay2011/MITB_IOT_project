@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "app_function": "app.app",
+        "profile_name": "default",
+        "project_name": "mitb-iot-projec",
+        "runtime": "python3.7",
+        "s3_bucket": "zappa-7sjcx5cop",
+        "aws_region": "us-west-2"
+    }
+}

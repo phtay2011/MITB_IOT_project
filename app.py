@@ -13,6 +13,10 @@ server = Flask(__name__)
 CORS(server, support_credentials=True)
 
 # api 1 - to generate the starting route
+@server.route("/")
+def hello():
+    return 'Hello'
+
 @server.route("/generate_starting_route")
 def generate_starting_route():
     dd = gmap_api.distance_duration_calculator(
