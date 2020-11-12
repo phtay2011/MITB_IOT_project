@@ -15,7 +15,8 @@ CORS(server, support_credentials=True)
 # api 1 - to generate the starting route
 @server.route("/")
 def hello():
-    return 'Hello'
+    return "Hello"
+
 
 @server.route("/generate_starting_route")
 def generate_starting_route():
