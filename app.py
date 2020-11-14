@@ -1,7 +1,7 @@
 from flask import Flask, request
 
 import gmap_api
-from utils import get_geo_loc
+from utils import get_geo_loc_v2
 import mqtt_module
 from flask_cors import CORS, cross_origin
 
@@ -45,9 +45,13 @@ def generate_starting_route_with_origin_destination():
 @server.route("/get_geo_location", methods=["POST"])
 def generate_geo_location():
     requester_input = request.json
-    node = tuple(requester_input["node"])
-    geo = get_geo_loc(node)
-    return f"{geo[0]},{geo[1]}"
+    print(requester_input)
+    node =requester_input["node"]
+    geo = get_geo_loc_v2(node)
+    print(geo)
+    #return f"{geo[0]},{geo[1]}"
+    return geo
+
 
 
 # api 2 - When uesr click the next button, FE needs to take the xth index of the `traffic_light_nodes` list
