@@ -62,7 +62,7 @@ class distance_duration_calculator:
             traffic_lights_location_lst.append(traffic_light_1)
             traffic_lights_location_lst.append(traffic_light_2)
             traffic_lights_location_lst.append(traffic_light_3)
-            if i <= 3:
+            if i <= 0:
                 traffic_lights_location_color.append("R")
                 traffic_lights_location_color.append("G")
                 traffic_lights_location_color.append("R")

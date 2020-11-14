@@ -37,14 +37,14 @@ def publish_gateway_to_broker(message):
     # publish the message
     logger.info(f"Publishing '{message}' to topic: {topic}")
     client.publish(topic=topic, payload=message, qos=0)
-    
+
     """
     # loop infinitely
     counter = 0
-    while counter < 5:
+    while counter < 1:
         # publish the message
         logger.info(f"Publishing '{message}' to topic: {topic}")
-        client.publish(topic=topic, payload=message, qos=0)
+        client.publish(topic=topic, payload=message, qos=2)
 
         # wait for timeout=1 seconds, process any events during that 1s, then return. See https://pypi.org/project/paho-mqtt/#network-loop
         client.loop(timeout=1)

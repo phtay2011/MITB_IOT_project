@@ -27,8 +27,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 MQTT_BROKER_HOSTNAME = "broker.mqttdashboard.com"
-traffic_light_instruction = "TEST2"
-traffic_light_instruction_to_print = "TEST1"
+traffic_light_instruction = "123456789"
+traffic_light_instruction_to_print = "123456789"
 """
 SECTION 1
 This section will be responsible to receive the information via MQTT
@@ -187,7 +187,7 @@ def serial_gateway_to_microbit():
         s.reset_input_buffer()
         # write data to the serial port, sleeping 1s between writes
         logger.info(f"writing to serial port:{traffic_light_instruction_to_print}")
-        for i in range(5):
+        for i in range(1):
             s.write(f"{traffic_light_instruction_to_print}\n".encode())
             time.sleep(1)
 
