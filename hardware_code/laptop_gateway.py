@@ -187,7 +187,7 @@ def serial_gateway_to_microbit():
         s.reset_input_buffer()
         # write data to the serial port, sleeping 1s between writes
         logger.info(f"writing to serial port:{traffic_light_instruction_to_print}")
-        for i in range(1):
+        for i in range(3):
             s.write(f"{traffic_light_instruction_to_print}\n".encode())
             time.sleep(1)
 

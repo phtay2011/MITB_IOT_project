@@ -41,7 +41,7 @@ def publish_gateway_to_broker(message):
     """
     # loop infinitely
     counter = 0
-    while counter < 1:
+    while counter < 3:
         # publish the message
         logger.info(f"Publishing '{message}' to topic: {topic}")
         client.publish(topic=topic, payload=message, qos=2)

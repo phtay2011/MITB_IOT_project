@@ -46,7 +46,7 @@ class distance_duration_calculator:
             lng = direction_results[0]["legs"][0]["steps"][i]["end_location"]["lng"]
             gps_node = (lat, lng)
             traffic_light_nodes_lst.append(gps_node)
-        traffic_light_nodes_lst  = traffic_light_nodes_lst[:8]
+        traffic_light_nodes_lst  = traffic_light_nodes_lst[:26]
         traffic_lights_location_lst = []
         traffic_lights_location_color = []
         for i in range(len(traffic_light_nodes_lst)):
