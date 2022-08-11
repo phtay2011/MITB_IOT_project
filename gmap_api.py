@@ -3,7 +3,7 @@ from datetime import datetime
 import numpy as np
 import random
 
-googleMapKey = "AIzaSyAPldhz_3zhaTEzHdhSQ0J5HUzOVLiDmZk"
+googleMapKey = ""
 
 # Geocoding an address
 class distance_duration_calculator:
